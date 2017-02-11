@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <div class="form-inline">
+    <label class="mr-sm-2 mr-2" for="year-select">Year:</label>
+    <%= select_tag :year, options_for_select(Stat::YEARS, @year), class: 'custom-select mb-2 mr-sm-2 mb-sm-0 js-year-select', id: 'year-select' %>
+  </div>
+</div>
+<div id="no-more-tables">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-sm-center">Address</th>
+        <% @measurements.each do |measurement| %>
+          <th class="text-sm-center"><%= measurement.name %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr class="text-center">
+          <td class="text-sm-center"><%= location.address %></td>
+          <% @measurements.each do |measurement| %>
+              <td data-title="<%= measurement.name %>" class="text-sm-center"><%= format_total(location, measurement) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
